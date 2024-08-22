@@ -1,6 +1,8 @@
 import express from 'express';
 
-export const serviceMemberRouter = express.Router();
+export const serviceMemberRouter = express.Router({
+    mergeParams: true,
+});
 
 serviceMemberRouter.get('/', (request, response) => {
     const services = ['design', 'ux', 'coding']

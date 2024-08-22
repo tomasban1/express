@@ -4,9 +4,14 @@ import { servicesRouter } from './router/servicesRouter.js';
 import { teamRouter } from './router/teamRouter.js';
 import { studentsRouter } from './router/studentsRouter.js';
 import { booksRouter } from './router/booksRouter.js';
+import { apiRouter } from './router/apiRouter.js';
+import { phoneRouter } from './router/phoneRouter.js';
 
 const app = express();
 const port = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (request, response) => {
     return response.send('Home page');
@@ -15,27 +20,11 @@ app.get('/', (request, response) => {
 app.get('/about', (request, response) => {
     return response.send('About page');
 })
-// ----------------------------------------------------------------
+
+app.use('/api', apiRouter);
 app.use('/students', studentsRouter);
-// ------------------------------------------------------------------------------
-
-app.use('/books', booksRouter)
-
-app.route('/phones')
-    .get((req, res) => {
-        return res.send(`GET: phones`)
-    })
-    .post((req, res) => {
-        return res.send(`POST: phones`)
-    })
-    .put((req, res) => {
-        return res.send(`PUT: phones`)
-    })
-    .delete((req, res) => {
-        return res.send(`DELETE: phones`)
-    })
-
-
+app.use('/books', booksRouter);
+app.use('/phones', phoneRouter)
 app.use('/services', servicesRouter);
 app.use('/team', teamRouter);
 

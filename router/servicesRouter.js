@@ -4,6 +4,8 @@ import { serviceMemberRouter } from './serviceMemberRouter.js';
 export const servicesRouter = express.Router();
 
 servicesRouter.get('/', (req, res) => {
+
+
     return res.send('Services page')
 });
 
